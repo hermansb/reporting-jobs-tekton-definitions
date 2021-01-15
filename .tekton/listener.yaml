@@ -42,6 +42,6 @@ metadata:
 spec:
   triggers:
     - binding:
-        name: trigger-github-push
+        name: trigger-initiate-reporting-jobs
       template:
         name: template-initiate-reporting-jobs
