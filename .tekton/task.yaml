@@ -14,12 +14,12 @@ spec:
       image: ibmcom/pipeline-base-image
       workingDir: /workspace
       env:
-        - name: USERNAME
+        - name: JOBS_USERNAME
           value: $(params.username)
-        - name: PASSWORD
+        - name: JOBS_PASSWORD
           value: $(params.password)
       command: ["/bin/bash", "-c"]
       args:
         - |
           set -eo pipefail
-          echo $USERNAME
+          curl --request POST "https://cd-broker.us-south.devops.dev.cloud.ibm.com/report_usage" --header "Authorization: Basic $(echo -n "$JOBS_USERNAME:$JOBS_PASSWORD" | base64)"
