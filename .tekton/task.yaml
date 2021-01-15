@@ -9,6 +9,7 @@ spec:
   params:
     - name: username
     - name: password
+    - name: url
   steps:
     - name: initiate-reporting-jobs
       image: ibmcom/pipeline-base-image
@@ -18,8 +19,10 @@ spec:
           value: $(params.username)
         - name: JOBS_PASSWORD
           value: $(params.password)
+        - name: url
+          value: $(params.url)
       command: ["/bin/bash", "-c"]
       args:
         - |
           set -eo pipefail
-          curl --request POST "https://cd-broker.us-south.devops.dev.cloud.ibm.com/report_usage" --header "Authorization: Basic $(echo -n "$JOBS_USERNAME:$JOBS_PASSWORD" | base64)"
+          curl --request POST "$url" --header "Authorization: Basic $(echo -n "$JOBS_USERNAME:$JOBS_PASSWORD" | base64)"

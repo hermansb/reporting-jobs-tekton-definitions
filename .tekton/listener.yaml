@@ -6,6 +6,7 @@ spec:
   params:
     - name: username
     - name: password
+    - name: url
   resourcetemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
@@ -34,6 +35,8 @@ spec:
             value: $(params.username)
           - name: password
             value: $(params.password)
+          - name: url
+            value: $(params.url)
 ---
 apiVersion: tekton.dev/v1beta1
 kind: EventListener

@@ -8,6 +8,7 @@ spec:
   params:
     - name: username
     - name: password
+    - name: url
   tasks:
     - name: task-initiate-reporting-jobs
       taskRef:
@@ -20,3 +21,5 @@ spec:
           value: $(params.username)
         - name: password
           value: $(params.password)
+        - name: url
+          value: $(params.url)
