@@ -19,10 +19,10 @@ spec:
           value: $(params.username)
         - name: JOBS_PASSWORD
           value: $(params.password)
-        - name: url
+        - name: JOBS_URL
           value: $(params.url)
       command: ["/bin/bash", "-c"]
       args:
         - |
           set -eo pipefail
-          curl --request POST "$url" --header "Authorization: Basic $(echo -n "$JOBS_USERNAME:$JOBS_PASSWORD" | base64)"
+          curl --request POST "$JOBS_URL" --header "Authorization: Basic $(echo -n "$JOBS_USERNAME:$JOBS_PASSWORD" | base64)"
