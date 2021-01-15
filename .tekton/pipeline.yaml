@@ -1,0 +1,22 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: pipeline-initiate-reporting-jobs
+spec:
+  workspaces:
+    - name: pipeline-pvc
+  params:
+    - name: username
+    - name: password
+  tasks:
+    - name: task-initiate-reporting-jobs
+      taskRef:
+        name: task-initiate-reporting-jobs
+      workspaces:
+        - name: pipeline-pvc
+          workspace: pipeline-pvc
+      params:
+        - name: username
+          value: $(params.username)
+        - name: password
+          value: $(params.password)

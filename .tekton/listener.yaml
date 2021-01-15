@@ -1,0 +1,47 @@
+apiVersion: tekton.dev/v1beta1
+kind: TriggerTemplate
+metadata:
+  name: template-initiate-reporting-jobs
+spec:
+  params:
+    - name: username
+    - name: password
+  resourcetemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: pipelinerun-$(uid)-pvc
+      spec:
+        resources:
+          requests:
+            storage:  5Gi
+        volumeMode: Filesystem
+        accessModes:
+          - ReadWriteOnce
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        generateName: initiate-reporting-jobs-
+      spec:
+        pipelineRef:
+            name: pipeline-initiate-reporting-jobs
+        workspaces:
+          - name: pipeline-pvc
+            persistentVolumeClaim:
+              claimName: pipelinerun-$(uid)-pvc
+        params:
+          - name: username
+            value: $(params.username)
+          - name: password
+            value: $(params.password)
+---
+apiVersion: tekton.dev/v1beta1
+kind: EventListener
+metadata:
+  name: listener-initiate-reporting-jobs
+spec:
+  triggers:
+    - binding:
+        name: trigger-github-push
+      template:
+        name: template-initiate-reporting-jobs
