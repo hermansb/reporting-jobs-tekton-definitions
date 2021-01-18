@@ -12,7 +12,7 @@ spec:
     - name: url
   steps:
     - name: initiate-reporting-jobs
-      image: ibmcom/otc-deliver-base
+      image: curl -V ibmcom/otc-deliver-base
       workingDir: /workspace
       env:
         - name: JOBS_USERNAME
@@ -25,4 +25,4 @@ spec:
       args:
         - |
           set -eo pipefail
-          curl --request POST "$JOBS_URL" --header "Authorization: Basic $(echo -n "$JOBS_USERNAME:$JOBS_PASSWORD" | base64)"
+          curl --request POST "$JOBS_URL" --header "Authorization: Basic $(echo -n "$JOBS_USERNAME:$JOBS_PASSWORD" | base64)" --http1.1 
