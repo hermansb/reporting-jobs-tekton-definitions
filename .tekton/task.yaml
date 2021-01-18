@@ -12,7 +12,7 @@ spec:
     - name: url
   steps:
     - name: initiate-reporting-jobs
-      image: ibmcom/pipeline-base-image
+      image: ibmcom/otc-deliver-base
       workingDir: /workspace
       env:
         - name: JOBS_USERNAME
