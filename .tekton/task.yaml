@@ -19,7 +19,7 @@ spec:
           value: $(params.username)
         - name: JOBS_PASSWORD
           value: $(params.password)
-        - name: JOBS_URLs
+        - name: JOBS_URL
           value: $(params.url)
       command: ["/bin/bash", "-c"]
       args:
