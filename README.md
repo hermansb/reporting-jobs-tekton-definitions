@@ -1,8 +1,8 @@
 # reporting-jobs-tekton-definitions
 
-This tekton pipeline is used to initiate reports for CD-Broker and CD-Bss Apps and the pipeline is scheduled to run every 4 hours.
+This tekton pipeline is responsible for initiating reports for CD-Broker and CD-Bss Apps and the pipeline is scheduled to run **every 4 hours**
 
-#### Cron expression implemented: 0 */4 * * *
+#### Cron expression: 0 */4 * * * 
 
 ## Pipeline-Level Environment Variables
 
