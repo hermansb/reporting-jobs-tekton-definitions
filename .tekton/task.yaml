@@ -12,14 +12,14 @@ spec:
     - name: url
   steps:
     - name: initiate-reporting-jobs
-      image: ibmcom/pipeline-base-image
+      image: ibmcom/otc-deliver-base
       workingDir: /workspace
       env:
         - name: JOBS_USERNAME
           value: $(params.username)
         - name: JOBS_PASSWORD
           value: $(params.password)
-        - name: JOBS_URL
+        - name: JOBS_URLs
           value: $(params.url)
       command: ["/bin/bash", "-c"]
       args:
