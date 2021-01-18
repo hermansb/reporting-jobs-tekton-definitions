@@ -25,4 +25,4 @@ spec:
       args:
         - |
           set -eo pipefail
-          curl --request POST "https://cd-broker.us-south.devops.dev.cloud.ibm.com/report_usage" --header "Authorization: Basic $(echo -n "$JOBS_USERNAME:$JOBS_PASSWORD" | base64)"
+          curl --request POST "$JOBS_URL" --header "Authorization: Basic $(echo -n "$JOBS_USERNAME:$JOBS_PASSWORD" | base64)"
