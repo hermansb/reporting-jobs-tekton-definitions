@@ -3,9 +3,6 @@ kind: Task
 metadata:
   name: task-initiate-reporting-jobs
 spec:
-  workspaces:
-    - name: pipeline-pvc
-      mountPath: /pipeline-pvc
   params:
     - name: username
     - name: password
