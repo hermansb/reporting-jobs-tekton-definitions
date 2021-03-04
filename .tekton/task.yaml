@@ -22,4 +22,4 @@ spec:
       args:
         - |
           set -eo pipefail
-          curl --request POST "$JOBS_URL" --header "Authorization: Basic $(echo -n "$JOBS_USERNAME:$JOBS_PASSWORD" | base64 -w 0)" 
+          curl -v --request POST "$JOBS_URL" --header "Authorization: Basic $(echo -n "$JOBS_USERNAME:$JOBS_PASSWORD" | base64 -w 0)" 
