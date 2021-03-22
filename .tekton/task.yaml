@@ -4,6 +4,8 @@ metadata:
   name: task-initiate-reporting-jobs
 spec:
   params:
+    - name: cdBrokerVaultPasswordConfigured
+      default: 'false'
     - name: username
     - name: password
     - name: url
@@ -12,6 +14,8 @@ spec:
       image: ibmcom/otc-deliver-base
       workingDir: /workspace
       env:
+        - name: CD_BROKER_VAULT_PASSWORD_CONFIGURED
+          value: $(params.cdBrokerVaultPasswordConfigured)
         - name: JOBS_USERNAME
           value: $(params.username)
         - name: JOBS_PASSWORD
@@ -22,4 +26,7 @@ spec:
       args:
         - |
           set -eo pipefail
-          curl -v --request POST "$JOBS_URL" --header "Authorization: Basic $(echo -n "$JOBS_USERNAME:$JOBS_PASSWORD" | base64 -w 0)" 
+          if [[ $CD_BROKER_VAULT_PASSWORD_CONFIGURED ]]; then
+            JOBS_PASSWORD=`echo "$JOBS_PASSWORD" | jq -r ".$JOBS_USERNAME"`
+          fi
+          curl -fi --request POST "$JOBS_URL" --header "Authorization: Basic $(echo -n "$JOBS_USERNAME:$JOBS_PASSWORD" | base64 -w 0)" 

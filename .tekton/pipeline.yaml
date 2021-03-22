@@ -4,6 +4,7 @@ metadata:
   name: pipeline-initiate-reporting-jobs
 spec:
   params:
+    - name: cdBrokerVaultPasswordConfigured
     - name: username
     - name: password
     - name: url
@@ -12,6 +13,8 @@ spec:
       taskRef:
         name: task-initiate-reporting-jobs
       params:
+        - name: cdBrokerVaultPasswordConfigured
+          value: $(params.cdBrokerVaultPasswordConfigured)
         - name: username
           value: $(params.username)
         - name: password
