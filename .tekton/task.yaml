@@ -11,7 +11,7 @@ spec:
     - name: url
   steps:
     - name: initiate-reporting-jobs
-      image: ibmcom/otc-deliver-base
+      image: alpine/curl
       workingDir: /workspace
       env:
         - name: CD_BROKER_VAULT_PASSWORD_CONFIGURED
