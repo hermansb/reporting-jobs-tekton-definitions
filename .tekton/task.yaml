@@ -22,7 +22,7 @@ spec:
           value: $(params.password)
         - name: JOBS_URL
           value: $(params.url)
-      command: ["/bin/bash", "-c"]
+      command: ["/bin/sh", "-c"]
       args:
         - |
           set -eo pipefail
